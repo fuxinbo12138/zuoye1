@@ -1,0 +1,22 @@
+{
+  "name": "zuoye1",
+  "version": "1.0.0",
+  "description": "1. js异步编程",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fuxinbo12138/zuoye1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fuxinbo12138/zuoye1/issues"
+  },
+  "homepage": "https://github.com/fuxinbo12138/zuoye1#readme",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
+}
