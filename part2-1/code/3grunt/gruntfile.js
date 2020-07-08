@@ -123,12 +123,13 @@ module.exports = grunt => {
             html: 'temp/*.html',
             // explicitly specify the temp directory you are working in
             // this is the the base of your links ( "/" )
-            temp: '/'
+            temp: 'dist'
         }
           
     })
 
     loadGruntTasks(grunt)
 
-    grunt.registerTask('default', ['sass', 'babel', 'web_swig', 'useref', 'copy'])
+    // grunt.registerTask('default', ['sass', 'babel', 'web_swig', 'useref', 'copy'])
+    grunt.registerTask('default', ['web_swig', 'useref', 'concat', 'uglify', 'cssmin','sass', 'babel', 'copy'])
 }
