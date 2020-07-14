@@ -4,13 +4,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin') //提取css文件
 const webpack = require('webpack')
-
 const path = require('path')
 
 module.exports = {
+  mode: 'development',
   entry: './src/main.js',
   output: {
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'js/bundle.js'
   },
   module: {
     rules: [
@@ -20,8 +21,14 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env']
           },
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
+        exclude: [
+          /node_modules/,
+          /\bcore-js\b/,
+          /\bwebpack\/buildin\b/,
+          /\bregenerator-runtime\b/,
+        ]
       },
       {
         test: /\.vue$/, // 解析vue模块使用提取css文件
@@ -78,4 +85,5 @@ module.exports = {
       template: './public/index.html'
     })
   ]
+
 }
