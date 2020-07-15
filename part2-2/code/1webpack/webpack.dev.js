@@ -10,6 +10,18 @@ module.exports = merge(common, {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/bundle.js'
   },
+  module:{
+    rules: [
+      {
+        test: /\.less$/, // 解析less文
+        use: ['style-loader', 'css-loader', 'less-loader']
+      },
+      {
+        test: /\.css$/, // 解析css文件
+        use: ['style-loader', 'css-loader']
+      },
+    ]
+  },
   // devtool: 'cheap-eval-module-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'public'),

@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "develop": "webpack-dev-server --config webpack.common.js",
     "dev": "webpack-dev-server --config webpack.dev.js",
-    "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint --ext .js,.vue src",
     "lintfix": "eslint --fix --ext .js,.vue src"
