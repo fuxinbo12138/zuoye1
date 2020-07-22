@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>差值表达式</h1>
+        <p>{{ message }}</p>
+        <p>{{ count }}</p>
+        <h1>指令</h1>
+        <p v-html="message"></p>
+        <p v-text="message"></p>
+        <h1 v-on:Click="handelClick">v-model</h1>
+        <input type="text" v-model="message">
+        <input type="text" v-model="count">
+    </div>
+    <script type="module">
+        import MyVue from './myVue/index.js'
+        const vm = new MyVue({
+            el: document.querySelector('#app'),
+            data: {
+                message: '这是一个简化版的VueJS',
+                count: 10
+            },
+            methods: {
+                handelClick: function() {
+                    console.log(123)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
