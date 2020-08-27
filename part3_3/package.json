@@ -1,0 +1,21 @@
+{
+  "name": "zuoye1",
+  "version": "0.1.0",
+  "description": "realworld-nuxt",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fuxinbo12138/zuoye1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fuxinbo12138/zuoye1/issues"
+  },
+  "homepage": "https://github.com/fuxinbo12138/zuoye1#readme",
+  "dependencies": {
+    "cookieparser": "^0.1.0",
+    "lodash": "^4.17.15"
+  }
+}
