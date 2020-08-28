@@ -28,10 +28,12 @@
     <button
       class="btn btn-sm btn-outline-secondary"
       :class="{ active: article.author.following }"
+      :disabled="followingDisabled"
+      @click="following()"
     >
       <i class="ion-plus-round"></i>
 
-      &nbsp; Follow Eric Simons <span class="counter">(10)</span>
+      &nbsp; Follow {{ article.author.username }}
     </button>
 
     &nbsp;&nbsp;
@@ -39,15 +41,20 @@
     <button
       class="btn btn-sm btn-outline-primary"
       :class="{ active: article.favorited }"
+      :disabled="FavoriteFisabled"
+      @click="favorited()"
     >
       <i class="ion-heart"></i>
 
-      &nbsp; Favorite Post <span class="counter">({{ article.favoritesCount }})</span>
+      &nbsp; Favorite Post
+      <span class="counter">({{ article.favoritesCount }})</span>
     </button>
   </div>
 </template>
 
 <script>
+import { favoriteArticle, unFavoriteArticle } from "@/api/article.js";
+import { follow, unfollow } from "@/api/user.js";
 export default {
   name: "userComponent",
   components: {},
@@ -57,13 +64,42 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      followingDisabled: false,
+      FavoriteFisabled: false
+    };
   },
   computed: {},
   watch: {},
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+    async following() {
+      if (!this.$store.state.user) {
+        this.$router.push({ name: "login" });
+        return;
+      }
+      const article = this.article;
+      this.followingDisabled = true;
+      let onOff = article.favorited;
+      const handle = onOff ? unfollow : follow;
+      const { data } = await handle(article.slug);
+      this.$emit('changeFollow', data.profile)
+      this.followingDisabled = false;
+    },
+    async favorited() {
+      if (!this.$store.state.user) {
+        this.$router.push({ name: "login" });
+        return;
+      }
+      const article = this.article;
+      this.FavoriteFisabled = true;
+      let onOff = article.favorited;
+      const handle = onOff ? unFavoriteArticle : favoriteArticle;
+      this.$emit('changeFavorite', data.article)
+      this.FavoriteFisabled = false;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped></style>

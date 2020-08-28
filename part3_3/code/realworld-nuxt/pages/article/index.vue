@@ -5,7 +5,11 @@
         <div class="container">
           <h1>{{ article.title }}</h1>
           <div class="article-actions">
-            <user :article="article" />
+            <user
+              @changeFollow="follow"
+              @changeFavorite="favorite"
+              :article="article"
+            />
           </div>
         </div>
       </div>
@@ -22,7 +26,11 @@
         </div>
 
         <div class="row">
-          <comment :article="article" />
+          <comment
+            @changeFollow="follow"
+            @changeFavorite="favorite"
+            :article="article"
+          />
         </div>
       </div>
     </div>
@@ -51,9 +59,13 @@ export default {
     return {
       title: `${this.article.title} - RealWorld`,
       meta: [
-        { hid: 'description', name: 'description', content: this.article.description}
+        {
+          hid: "description",
+          name: "description",
+          content: this.article.description
+        }
       ]
-    }
+    };
   },
   data() {
     return {};
@@ -62,7 +74,14 @@ export default {
   watch: {},
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+    follow(value) {
+      this.article.profile = value;
+    },
+    favorite(value) {
+      this.article = value;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped></style>

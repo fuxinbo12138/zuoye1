@@ -16,6 +16,9 @@
               <button
                 class="btn btn-sm btn-outline-secondary action-btn"
                 :class="{ active: profile.following }"
+                :disabled="followingDisabled"
+                @click="following()"
+                v-if="profile.username !== user.username"
               >
                 <i class="ion-plus-round"></i>
 
@@ -158,7 +161,7 @@
 </template>
 
 <script>
-import { getProfiles } from "@/api/user";
+import { getProfiles, follow, unfollow } from "@/api/user";
 import { getArticles, favoriteArticle, unFavoriteArticle } from "@/api/article";
 export default {
   name: "profilePage",
@@ -193,6 +196,8 @@ export default {
 
     return {
       username,
+      limit,
+      page,
       articles,
       articlesCount,
       profile,
@@ -201,20 +206,42 @@ export default {
   },
   watchQuery: ["tab", 'page'],
   data() {
-    return {};
+    return {
+      followingDisabled: false,
+    };
   },
   computed: {},
   watch: {},
   created() {},
   mounted() {},
-  computed: {},
+  computed: {
+    user() {
+      return this.$store.state.user || {};
+    },
+    totalPage() {
+      return Math.ceil(this.articlesCount / this.limit);
+    }
+  },
   methods: {
+    async following() {
+      if (!this.$store.state.user) {
+        this.$router.push({ name: "login" });
+        return;
+      }
+      const article = this.article;
+      this.followingDisabled = true;
+      let onOff = this.profile.following;
+      const handle = onOff ? unfollow : follow;
+      const { data } = await handle(this.profile.username);
+      this.profile = data.profile
+      this.followingDisabled = false;
+    },
     async favorited(article, index) {
       if(!this.$store.state.user) {
           this.$router.push({name: 'login'})
           return
       }
-      article.disabled = true;
+      this.$set(this.articles[index], "disabled", true);
       let onOff = article.favorited;
       const handle = onOff ? unFavoriteArticle : favoriteArticle;
       const { data } = await handle(article.slug);
