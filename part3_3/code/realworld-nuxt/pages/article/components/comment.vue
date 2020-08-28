@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.state.user;
+      return this.$store.state.user || {};
     }
   },
   watch: {},
@@ -84,6 +84,10 @@ export default {
   },
   methods: {
     submit() {
+      if(!this.$store.state.user) {
+          this.$router.push({name: 'login'})
+          return
+      }
       createComment(this.article.slug, {
         comment: {
           body: this.comment

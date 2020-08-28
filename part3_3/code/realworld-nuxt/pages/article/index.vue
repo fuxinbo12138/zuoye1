@@ -5,7 +5,7 @@
         <div class="container">
           <h1>{{ article.title }}</h1>
           <div class="article-actions">
-            <user :article="article"/>
+            <user :article="article" />
           </div>
         </div>
       </div>
@@ -18,11 +18,11 @@
         <hr />
 
         <div class="article-actions">
-          <user :article="article"/>
+          <user :article="article" />
         </div>
 
         <div class="row">
-            <comment :article="article"/>
+          <comment :article="article" />
         </div>
       </div>
     </div>
@@ -46,6 +46,14 @@ export default {
     return {
       article
     };
+  },
+  head() {
+    return {
+      title: `${this.article.title} - RealWorld`,
+      meta: [
+        { hid: 'description', name: 'description', content: this.article.description}
+      ]
+    }
   },
   data() {
     return {};

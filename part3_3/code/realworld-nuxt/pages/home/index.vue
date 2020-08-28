@@ -211,6 +211,10 @@ export default {
   mounted() {},
   methods: {
     async favorited(article, index) {
+      if(!this.$store.state.user) {
+          this.$router.push({name: 'login'})
+          return
+      }
      article.disabled = true
      let onOff = article.favorited
      const handle = onOff ? unFavoriteArticle : favoriteArticle;
