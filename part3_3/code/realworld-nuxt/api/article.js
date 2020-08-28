@@ -59,3 +59,21 @@ export const getArticlesDetail = slug => {
     url: `/api/articles/${slug}`
   });
 };
+
+//创建评论
+export const createComment = (slug, data) => {
+  return request({
+    method: "post",
+    url: `/api/articles/${slug}/comments`,
+    data
+  });
+};
+
+//获取评论列表
+export const getComments = slug => {
+  return request({
+    method: "get",
+    url: `/api/articles/${slug}/comments`
+  });
+};
+

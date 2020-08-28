@@ -182,9 +182,7 @@ export default {
       item.disabled = false
     })
 
-    tags = tags.data.tags.filter(item => {
-      return item;
-    });
+    tags = tags.data.tags.splice(0, 30)
 
 
     return {

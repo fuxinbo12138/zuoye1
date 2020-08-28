@@ -18,7 +18,7 @@ export const register = data => {
   });
 };
 
-//注册
+//获取自己信息
 export const getUser = data => {
   return request({
     url: "/api/user",
@@ -33,5 +33,30 @@ export const update = data => {
     url: "/api/user",
     method: "put",
     data
+  });
+};
+
+// 获取用户信息
+export const getProfiles = username => {
+  return request({
+    url: `/api/profiles/${username}`,
+    method: "get",
+  });
+};
+
+
+// 关注作者
+export const follow = username => {
+  return request({
+    url: `/api/profiles/${username}/follow`,
+    method: "post",
+  });
+};
+
+// 取消关注作者
+export const unfollow = username => {
+  return request({
+    url: `/api/profiles/${username}/follow`,
+    method: "delete",
   });
 };
