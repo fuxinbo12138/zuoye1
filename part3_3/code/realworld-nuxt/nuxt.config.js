@@ -42,7 +42,7 @@ export default {
       },
       {
         rel: "stylesheet",
-        href: "/css/index.css",
+        href: "/nuxt-real-world/css/index.css",
       },
     ],
   },
@@ -50,6 +50,9 @@ export default {
    ** Global CSS
    */
   css: [],
+  generate: {
+    fallback: 'index.html'
+  },
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -57,6 +60,7 @@ export default {
   plugins: ['~/plugins/request.js'],
   //配置路由规则
   router: {
+    base: '/nuxt-real-world/',
     linkExactActiveClass: 'active',
     extendRoutes(routes, resolve) {
       routes.splice(0)
