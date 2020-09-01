@@ -81,9 +81,9 @@ export default {
       }
       const article = this.article;
       this.followingDisabled = true;
-      let onOff = article.favorited;
+      let onOff = article.author.following;
       const handle = onOff ? unfollow : follow;
-      const { data } = await handle(article.slug);
+      const { data } = await handle(article.author.username);
       this.$emit('changeFollow', data.profile)
       this.followingDisabled = false;
     },
@@ -96,6 +96,7 @@ export default {
       this.FavoriteFisabled = true;
       let onOff = article.favorited;
       const handle = onOff ? unFavoriteArticle : favoriteArticle;
+      const { data } = await handle(article.slug);
       this.$emit('changeFavorite', data.article)
       this.FavoriteFisabled = false;
     }

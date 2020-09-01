@@ -22,7 +22,7 @@
     <div v-for="item in commentList" :key="item.id" class="card">
       <div class="card-block">
         <p class="card-text">
-          With supporting text below as a natural lead-in to additional content.
+          {{ item.body }}
         </p>
       </div>
 
@@ -36,21 +36,13 @@
           }"
           class="comment-author"
         >
-          <img
-            :src="item.author.image"
-            class="comment-author-img"
-          />
+          <img :src="item.author.image" class="comment-author-img" />
         </nuxt-link>
 
         &nbsp;
 
         <a href="" class="comment-author">{{ item.author.username }}</a>
         <span class="date-posted">{{ item.author.createdAt }}</span>
-        <span class="mod-options">
-          <i class="ion-edit"></i>
-
-          <i class="ion-trash-a"></i>
-        </span>
       </div>
     </div>
   </div>
@@ -84,16 +76,16 @@ export default {
   },
   methods: {
     submit() {
-      if(!this.$store.state.user) {
-          this.$router.push({name: 'login'})
-          return
+      if (!this.$store.state.user) {
+        this.$router.push({ name: "login" });
+        return;
       }
       createComment(this.article.slug, {
         comment: {
           body: this.comment
         }
       }).then(({ data }) => {
-          this.commentList.unshift(data.comments[0])
+        this.commentList.unshift(data.comment);
       });
     },
     getCommentList() {

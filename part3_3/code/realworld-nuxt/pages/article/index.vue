@@ -76,7 +76,8 @@ export default {
   mounted() {},
   methods: {
     follow(value) {
-      this.article.profile = value;
+      this.$set(this.article, 'author', value)
+      console.log(this.article)
     },
     favorite(value) {
       this.article = value;
